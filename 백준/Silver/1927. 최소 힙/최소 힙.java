@@ -3,15 +3,16 @@ import java.io.*;
 class Main{
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int e = 0;
 		int[] heap = new int[100000];
 		int r = Integer.parseInt(br.readLine());
 		for(int i = 0; i < r; i++) {
 			int n = Integer.parseInt(br.readLine());
 			if(n == 0) {
-				if(e == 0) System.out.println(0);
+				if(e == 0) bw.write("0\n");
 				else {
-					System.out.println(heap[0]);
+					bw.write(Integer.toString(heap[0])+"\n");
 					heap[0] = heap[e-1];
 					heap[e-1] = 0;
 					e--;
@@ -68,5 +69,7 @@ class Main{
 //				}
 			}
 		}
+		bw.flush();
+		bw.close();
 	}
 }
