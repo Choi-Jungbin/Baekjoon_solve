@@ -8,9 +8,13 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int n = Integer.parseInt(br.readLine());
 		String s = br.readLine();
-		int sum = 0;
+		long sum = 0;
+		long r = 1;
 		for(int i = 0; i < n; i++) {
-			sum += (s.charAt(i)-96) * Math.pow(31,i);
+			long c = s.charAt(i) - 96;
+			c = c*r % 1234567891;
+			sum = (sum + c) % 1234567891;
+			r = (r*31) % 1234567891;
 		}
 		System.out.println(sum%1234567891);
 	}
