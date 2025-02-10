@@ -31,48 +31,25 @@ public class Main {
 		int[][] count = new int[n][n];
 		Deque<Loc> que = new ArrayDeque<>();
 		que.offer(new Loc(0,1,0));
+		boolean[] check = new boolean[3];
 		while(!que.isEmpty()) {
 			Loc loc = que.poll();
 			// 가로, 세로, 대각선
-			boolean[] check = new boolean[3];
-			if(loc.y+1 < n) check[0] = !room[loc.x][loc.y+1];
-			if(loc.x+1 < n) check[1] = !room[loc.x+1][loc.y];
-			if(loc.x+1 < n && loc.y+1 < n) check[2] = check[0] && check[1] &&!room[loc.x+1][loc.y+1];
-			switch(loc.dir){
-			case 0:
-				if(check[0]) {
-					que.offer(new Loc(loc.x, loc.y+1, 0));
-					count[loc.x][loc.y+1] += 1;
-				}
-				if(check[2]) {
-					que.offer(new Loc(loc.x+1, loc.y+1, 2));
-					count[loc.x+1][loc.y+1] += 1;
-				}
-				break;
-			case 1:
-				if(check[1]) {
-					que.offer(new Loc(loc.x+1, loc.y, 1));
-					count[loc.x+1][loc.y] += 1;
-				}
-				if(check[2]) {
-					que.offer(new Loc(loc.x+1, loc.y+1, 2));
-					count[loc.x+1][loc.y+1] += 1;
-				}
-				break;
-			case 2:
-				if(check[0]) {
-					que.offer(new Loc(loc.x, loc.y+1, 0));
-					count[loc.x][loc.y+1] += 1;
-				}
-				if(check[1]) {
-					que.offer(new Loc(loc.x+1, loc.y, 1));
-					count[loc.x+1][loc.y] += 1;
-				}
-				if(check[2]) {
-					que.offer(new Loc(loc.x+1, loc.y+1, 2));
-					count[loc.x+1][loc.y+1] += 1;
-				}
-				break;
+			check[0] = loc.y+1 < n && !room[loc.x][loc.y+1];
+			check[1] = loc.x+1 < n && !room[loc.x+1][loc.y];
+			check[2] = loc.x+1 < n && loc.y+1 < n && check[0] && check[1] &&!room[loc.x+1][loc.y+1];
+			
+			if(check[0] && loc.dir != 1) {
+				que.offer(new Loc(loc.x, loc.y+1, 0));
+				count[loc.x][loc.y+1] += 1;
+			}
+			if(check[1] && loc.dir != 0) {
+				que.offer(new Loc(loc.x+1, loc.y, 1));
+				count[loc.x+1][loc.y] += 1;
+			}
+			if(check[2]) {
+				que.offer(new Loc(loc.x+1, loc.y+1, 2));
+				count[loc.x+1][loc.y+1] += 1;
 			}
 		}
 		System.out.println(count[n-1][n-1]);
