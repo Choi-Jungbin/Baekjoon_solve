@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {	
+	static int min;
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
@@ -28,7 +30,11 @@ public class Solution {
 				continue;
 			}
 			
-			System.out.println("#" + test + " " + drug(d, w, k, map, 0, 0));
+			// 최대값
+			min = k;
+			drug(d, w, k, map, 0, 0);
+			
+			System.out.println("#" + test + " " + min);
 		}
 	}
 	
@@ -52,32 +58,33 @@ public class Solution {
 		return true;
 	}
 	
-	static int drug(int d, int w, int k, int[] map, int change, int start) {
-		int result = k;
+	static void drug(int d, int w, int k, int[] map, int change, int start) {
 		int store = 0;
 		change++;
+		if(change >= min) return;
 		for(int i = start; i < d; i++) {
 			store = map[i];
 			// true로 바꾸기
 			map[i] = 0;
 			if(check(d,w,k,map)) {
 				map[i] = store;
-				return change;
+				min = Math.min(min, change);
+				return;
 			}
 			else {
-				result = Math.min(result, drug(d, w, k, map, change, i+1));
+				drug(d, w, k, map, change, i+1);
 			}
 			// false로 바꾸기
 			map[i] = (1 << w) - 1;
 			if(check(d,w,k,map)) {
 				map[i] = store;
-				return change;
+				min = Math.min(min, change);
+				return;
 			}
 			else {
-				result = Math.min(result, drug(d, w, k, map, change, i+1));
+				drug(d, w, k, map, change, i+1);
 			}
 			map[i] = store;
 		}
-		return result;
 	}
 }
