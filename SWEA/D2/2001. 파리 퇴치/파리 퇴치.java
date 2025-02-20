@@ -9,39 +9,19 @@ public class Solution {
 			String[] s = br.readLine().split(" ");
 			int n = Integer.parseInt(s[0]);
 			int m = Integer.parseInt(s[1]);
-			int[][] board = new int[n][n];
-			for(int i = 0; i < n; i++) {
+			int[][] board = new int[n+1][n+1];
+			for(int i = 1; i <= n; i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
-				for(int j = 0; j < n; j++) {
-					board[i][j] = Integer.parseInt(st.nextToken());
+				for(int j = 1; j <= n; j++) {
+					int a = Integer.parseInt(st.nextToken());
+					board[i][j] = a + board[i-1][j] + board[i][j-1] - board[i-1][j-1];
 				}
 			}
 			
-			// 열에 대한 슬라이딩 윈도우
-			int[][] window = new int[n][n-m+1];
-			for(int i = 0; i < n; i++) {
-				int a = 0;
-				for(int j = 0; j < m; j++) {
-					a += board[i][j];
-				}
-				window[i][0] = a;
-				for(int j = 1; j <= n-m; j++) {
-					a += board[i][j+m-1] - board[i][j-1];
-					window[i][j] = a;
-				}
-			}
-			
-			// 행에 대한 슬라이딩 윈도우
 			int max = 0;
-			for(int j = 0; j <= n-m; j++) {
-				int a = 0;
-				for(int i = 0; i < m; i++) {
-					a += window[i][j];
-				}
-				max = Math.max(max, a);
-				for(int i = 1; i <= n-m; i++) {
-					a += window[i+m-1][j] - window[i-1][j];
-					max = Math.max(max, a);
+			for(int i = m; i <= n; i++) {
+				for(int j = m; j <= n; j++) {
+					max = Math.max(max, board[i][j] - board[i-m][j] - board[i][j-m] + board[i-m][j-m]);
 				}
 			}
 			
