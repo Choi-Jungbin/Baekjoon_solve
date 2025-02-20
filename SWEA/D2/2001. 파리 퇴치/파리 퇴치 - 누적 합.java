@@ -9,10 +9,13 @@ public class Solution {
 			String[] s = br.readLine().split(" ");
 			int n = Integer.parseInt(s[0]);
 			int m = Integer.parseInt(s[1]);
+			
+			// 가의 위치도 계산해야 하기 때문에 한 줄씩 띄우기
 			int[][] board = new int[n+1][n+1];
 			for(int i = 1; i <= n; i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
 				for(int j = 1; j <= n; j++) {
+					// 받을 때 바로 누적 합 계산
 					int a = Integer.parseInt(st.nextToken());
 					board[i][j] = a + board[i-1][j] + board[i][j-1] - board[i-1][j-1];
 				}
