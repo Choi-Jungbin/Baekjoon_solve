@@ -4,7 +4,7 @@ import java.util.*;
 public class Solution {
 	static int n;
 	static boolean[] visit;
-	static List<Set<Integer>> list;
+	static List<List<Integer>> list;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +15,7 @@ public class Solution {
 			int m = Integer.parseInt(s[1]);
 			list = new ArrayList<>(n);
 			for(int i = 0; i < n; i++) {
-				list.add(new HashSet<Integer>());
+				list.add(new ArrayList<Integer>());
 			}
 			
 			for(int i = 0; i < m; i++) {
