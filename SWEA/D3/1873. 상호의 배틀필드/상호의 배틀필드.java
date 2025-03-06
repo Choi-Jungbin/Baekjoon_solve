@@ -65,11 +65,14 @@ public class Solution {
 				case 'S':
 					int dx = x + dir[d][0];
 					int dy = y + dir[d][1];
+					// 필드 나가기 전까지 포탄 직진
 					while(check(dx,dy)) {
+						// 벽돌 벽 만나면 파괴
 						if(board[dx][dy] == '*') {
 							board[dx][dy] = '.';
 							break;
 						}
+						// 강철 벽 만나면 포탄만 파괴
 						if(board[dx][dy] == '#') break;
 						dx += dir[d][0];
 						dy += dir[d][1];
@@ -89,7 +92,9 @@ public class Solution {
 			System.out.print(sb.toString());
 		}
 	}
-	
+
+	// 평지일 때 이동
+	// 아니면 방향만 바꾸기
 	static void move() {
 		int dx = x + dir[d][0];
 		int dy = y + dir[d][1];
