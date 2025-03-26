@@ -10,6 +10,8 @@
 
 2025-03-26 15:05
 
+### 성능 비교
+크기가 작아서 그런가 성능은 거기서 거기다. 10ms 내외로 차이가 나며 그냥 실행 당시 환경 차이인거 같다. 코드는 미묘하게 행렬이 더 짧다.
 
 
 > 출처: SW Expert Academy, https://swexpertacademy.com/main/code/problem/problemList.do
