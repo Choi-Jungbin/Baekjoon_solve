@@ -55,7 +55,7 @@ public class Solution {
 			min = Integer.MAX_VALUE;
 			combi(0,0);
 			
-			System.out.println("#" + test + " " + (min-1));
+			System.out.println("#" + test + " " + min);
 		}
 	}
 	
@@ -96,12 +96,7 @@ public class Solution {
 		Deque<Integer> que = new ArrayDeque<>();
 		int time = 0;
 
-		List<Integer> start = new ArrayList<>();
-		for(int a : arrival) {
-			start.add(a + 1);
-		}
-
-		PriorityQueue<Integer> waiting = new PriorityQueue<>(start);
+		PriorityQueue<Integer> waiting = new PriorityQueue<>(arrival);
 
 		time = waiting.peek();
 		while(!waiting.isEmpty() || !que.isEmpty()) {
