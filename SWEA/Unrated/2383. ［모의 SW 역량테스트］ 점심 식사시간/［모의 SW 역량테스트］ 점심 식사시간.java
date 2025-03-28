@@ -92,7 +92,6 @@ public class Solution {
 
 	static int simulate(List<Integer> arrival, int len) {
 		if(arrival.isEmpty()) return 0;
-		Collections.sort(arrival);
 		Deque<Integer> que = new ArrayDeque<>();
 		int time = 0;
 
