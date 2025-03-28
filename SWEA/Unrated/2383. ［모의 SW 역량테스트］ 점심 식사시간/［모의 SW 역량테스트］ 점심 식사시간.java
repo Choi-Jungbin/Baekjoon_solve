@@ -70,8 +70,8 @@ public class Solution {
 	}
 	
 	static void calc(int bit) {
-		List<Integer> stair0 = new ArrayList<>();
-		List<Integer> stair1 = new ArrayList<>();
+		PriorityQueue<Integer> stair0 = new PriorityQueue<>();
+		PriorityQueue<Integer> stair1 = new PriorityQueue<>();
 		
 		for(int i = 0; i < plen; i++) {
 			Person p = person.get(i);
@@ -90,21 +90,19 @@ public class Solution {
 		min = Math.min(min, Math.max(t0, t1));
 	}
 
-	static int simulate(List<Integer> arrival, int len) {
+	static int simulate(PriorityQueue<Integer> arrival, int len) {
 		if(arrival.isEmpty()) return 0;
 		Deque<Integer> que = new ArrayDeque<>();
 		int time = 0;
 
-		PriorityQueue<Integer> waiting = new PriorityQueue<>(arrival);
-
-		time = waiting.peek();
-		while(!waiting.isEmpty() || !que.isEmpty()) {
+		time = arrival.peek();
+		while(!arrival.isEmpty() || !que.isEmpty()) {
 			while(!que.isEmpty() && que.peek() <= time) {
 				que.poll();
 			}
-			while(que.size() < 3 && !waiting.isEmpty() && waiting.peek() <= time) {
+			while(que.size() < 3 && !arrival.isEmpty() && arrival.peek() <= time) {
 				que.offer(time + len);
-				waiting.poll();
+				arrival.poll();
 			}
 			time++;
 		}
