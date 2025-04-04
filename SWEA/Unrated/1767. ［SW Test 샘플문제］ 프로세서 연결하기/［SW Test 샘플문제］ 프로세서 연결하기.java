@@ -60,6 +60,7 @@ public class Solution {
     		}
     		return;
     	}
+    	if(c + size - p < count) return;
     	
     	int x = loc.get(p)[0];
     	int y = loc.get(p)[1];
@@ -93,12 +94,9 @@ public class Solution {
     				core[node.x][node.y] = false;
     			}
     		}
-    		// 전선이 연결되지 않은 경우
-    		else {
-    			calc(p+1, c, len);
-    		}
-    		
     		list.clear();
+			calc(p+1, c, len);
+    		
     		l = 0;
     	}
     }
