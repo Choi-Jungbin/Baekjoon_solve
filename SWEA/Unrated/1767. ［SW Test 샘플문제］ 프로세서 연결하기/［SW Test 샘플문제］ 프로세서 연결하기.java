@@ -60,7 +60,10 @@ public class Solution {
     		}
     		return;
     	}
+    	// 코어가 제일 많이 연결되지 못할 경우
     	if(c + size - p < count) return;
+    	// 코어가 제일 짧게 연결되지 못할 경우
+    	if(c + size - p == count && len >= min) return;
     	
     	int x = loc.get(p)[0];
     	int y = loc.get(p)[1];
