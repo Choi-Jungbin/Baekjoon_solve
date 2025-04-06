@@ -3,6 +3,8 @@ import java.util.*;
 
 public class Solution {
 	static int n, m;
+	static List<Node> node = new ArrayList<>();
+	static Deque<Integer> que = new ArrayDeque<>();
 	
 	static class Node{
 		List<Integer> big = new ArrayList<>();
@@ -22,7 +24,7 @@ public class Solution {
 			n = Integer.parseInt(br.readLine().trim());
 			m = Integer.parseInt(br.readLine().trim());
 			
-			List<Node> node = new ArrayList<>();
+			node.clear();
 			for(int i = 0; i < n; i++) {
 				node.add(new Node());
 			}
@@ -35,8 +37,8 @@ public class Solution {
 				node.get(b).small.add(a);
 			}
 			
+			que.clear();
 			int count = 0;
-			Deque<Integer> que = new ArrayDeque<>();
 			for(Node nd : node) {
 				boolean[] visit = new boolean[n];
 				for(int b : nd.big) {
