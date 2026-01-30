@@ -3,11 +3,14 @@
 using namespace std;
 
 int main(){
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	
 	int arr[100001] = {0};
 	int cnt = 0;
 	int n, a;
 	string s;
-	s.reserve(300001);
+	s.reserve(2000000);
 	cin >> n;
 	
 	for(int i = 0; i < n; i++){
@@ -17,17 +20,15 @@ int main(){
 			else{
 				// 제일 큰 수 출력 & 정렬 
 				s += to_string(arr[1]);
-				s += "\n";
+				s += '\n';
 				arr[1] = arr[cnt--];
 				int c = 1;
-				while(c <= cnt){
+				while(c*2 <= cnt){
 					int max = 0;
-					if(c*2 <= cnt){
-						if(c*2+1 <= cnt){
-							max = (arr[c*2] < arr[c*2+1]) ? c*2+1 : c*2;
-						}
-						else max = c*2;
+					if(c*2+1 <= cnt){
+						max = (arr[c*2] < arr[c*2+1]) ? c*2+1 : c*2;
 					}
+					else max = c*2;
 					if(max != 0 && arr[c] < arr[max]){
 						int tmp = arr[c];
 						arr[c] = arr[max];
